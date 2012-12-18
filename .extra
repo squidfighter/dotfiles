@@ -1,0 +1,41 @@
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+GIT_AUTHOR_NAME="Ankur Chauhan"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="achauhan@brightcove.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+
+
+JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+EDITOR="sublime -w"
+M2_HOME=/usr/share/maven
+GOROOT=/usr/local/Cellar/go/1.0.2
+PATH=/Users/achauhan/grails-2.0.4/bin:/usr/local/go/bin:$PATH
+
+
+# hub tab-completion script for bash.
+# This script complements the completion script that ships with git.
+
+# Check that git tab completion is available
+if declare -F _git > /dev/null; then
+  # Duplicate and rename the 'list_all_commands' function
+  eval "$(declare -f __git_list_all_commands | \
+        sed 's/__git_list_all_commands/__git_list_all_commands_without_hub/')"
+
+  # Wrap the 'list_all_commands' function with extra hub commands
+  __git_list_all_commands() {
+    cat <<-EOF
+alias
+pull-request
+fork
+create
+browse
+compare
+EOF
+    __git_list_all_commands_without_hub
+  }
+
+  # Ensure cached commands are cleared
+  __git_all_commands=""
+fi
