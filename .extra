@@ -9,10 +9,6 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 
 JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 EDITOR="sublime -w"
-M2_HOME=/usr/share/maven
-GOROOT=/usr/local/Cellar/go/1.0.2
-PATH=/Users/achauhan/grails-2.0.4/bin:/usr/local/go/bin:$PATH
-
 
 # hub tab-completion script for bash.
 # This script complements the completion script that ships with git.
@@ -39,3 +35,41 @@ EOF
   # Ensure cached commands are cleared
   __git_all_commands=""
 fi
+
+alias common="cd ~/projects/analytics"
+alias api="cd ~/projects/analytics_api"
+alias collector="cd ~/projects/analytics_collector"
+alias job="cd ~/projects/analytics_job"
+alias lj="cd ~/projects/analytics_lumberjack"
+alias it="cd ~/projects/analytics_integration_test"
+alias tools="cd ~/Projects/analytics_tools"
+alias ec2ssh="ssh -oStrictHostKeyChecking=no -l ubuntu -i ~/.ssh/rnadev1.pem"
+alias grep="LANG=C grep"
+
+export PATH=/usr/local/sbin:$PATH
+prod_curl () {
+  URL=$1;
+  shift;
+  JQ_OPTS=${*:-"."};
+  curl ${CURL_OPTS} -s --header "Authorization: Bearer ${RNA_GOD}" "${URL}" | jq "${JQ_OPTS}";
+}
+
+qa_curl() {
+  URL=$1;
+  shift;
+  JQ_OPTS=${*:-"."};
+  curl ${CURL_OPTS} -s --header "Authorization: Bearer ${QA_GOD}" "$URL" | jq "${JQ_OPTS}";
+}
+
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export PATH="$JAVA_HOME/bin"
+
+eval "$(rbenv init -)"

@@ -68,24 +68,19 @@ brew install tcpflow
 brew install tcpreplay
 brew install tcptrace
 brew install ucspi-tcp # `tcpserver` etc.
-brew install xpdf
 brew install xz
+brew install maven
 
 # Install other useful binaries.
 brew install ack
 #brew install exiv2
 brew install git
 brew install imagemagick --with-webp
-brew install lua
 brew install lynx
 brew install p7zip
-brew install pigz
 brew install pv
 brew install rename
-brew install rhino
-brew install speedtest_cli
 brew install tree
-brew install webkit2png
 brew install zopfli
 
 # Install Node.js. Note: this installs `npm` too, using the recommended
